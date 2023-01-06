@@ -6,6 +6,7 @@ from ovos_utils.parse import fuzzy_match
 from ovos_workshop.skills.common_play import OVOSCommonPlaybackSkill, \
     ocp_search, ocp_featured_media
 from youtube_archivist import YoutubeMonitor
+import random
 
 
 class PopcornFlixSkill(OVOSCommonPlaybackSkill):
@@ -24,12 +25,14 @@ class PopcornFlixSkill(OVOSCommonPlaybackSkill):
                                                           "soundtrack", " OST", "opening theme"])
 
     def initialize(self):
-        url = "https://www.youtube.com/channel/UCVFYikepF-avelvuIaQ_lHA/videos"
         bootstrap = "https://github.com/JarbasSkills/skill-popcornflix/raw/dev/bootstrap.json"
         self.archive.bootstrap_from_url(bootstrap)
-        self.archive.monitor(url)
-        self.archive.setDaemon(True)
-        self.archive.start()
+        self.schedule_event(self._sync_db, random.randint(3600, 24 * 3600))
+
+    def _sync_db(self):
+        url = "https://www.youtube.com/channel/UCVFYikepF-avelvuIaQ_lHA/videos"
+        self.archive.parse_videos(url)
+        self.schedule_event(self._sync_db, random.randint(3600, 24*3600))
 
     # matching
     def match_skill(self, phrase, media_type):
