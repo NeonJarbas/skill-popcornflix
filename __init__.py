@@ -13,7 +13,7 @@ class PopcornFlixSkill(OVOSCommonPlaybackSkill):
     def __init__(self, *args, **kwargs):
         self.supported_media = [MediaType.MOVIE,
                                 MediaType.GENERIC]
-        self.skill_icon = self.default_bg = join(dirname(__file__), "ui", "popcornflix_icon.jpg")
+        self.skill_icon = self.default_bg = join(dirname(__file__), "res", "popcornflix_icon.jpg")
         self.archive = JsonStorageXDG("Popcornflix", subfolder="OCP")
         super().__init__(*args, **kwargs)
 
@@ -113,4 +113,4 @@ if __name__ == "__main__":
     s = PopcornFlixSkill(bus=FakeBus(), skill_id="t.fake")
     for r in s.search_db("watch Isle of Dogs ", MediaType.MOVIE):
         print(r)
-        # {'title': 'Isle of Dogs (Full Movie) Action, Crime', 'author': 'Popcornflix', 'match_confidence': 45, 'media_type': <MediaType.MOVIE: 10>, 'uri': 'youtube//https://youtube.com/watch?v=lO35XpOV_LQ', 'playback': <PlaybackType.VIDEO: 1>, 'skill_icon': 'https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/raw/master/ovos_plugin_common_play/ocp/res/ui/images/ocp.png', 'skill_id': 't.fake', 'image': 'https://i.ytimg.com/vi/lO35XpOV_LQ/sddefault.jpg', 'bg_image': '/home/miro/PycharmProjects/OCP_sprint/skills/skill-popcornflix/ui/popcornflix_icon.jpg'}
+        # {'title': 'Isle of Dogs (Full Movie) Action, Crime', 'author': 'Popcornflix', 'match_confidence': 45, 'media_type': <MediaType.MOVIE: 10>, 'uri': 'youtube//https://youtube.com/watch?v=lO35XpOV_LQ', 'playback': <PlaybackType.VIDEO: 1>, 'skill_icon': 'https://github.com/OpenVoiceOS/ovos-ocp-audio-plugin/raw/master/ovos_plugin_common_play/ocp/res/ui/images/ocp.png', 'skill_id': 't.fake', 'image': 'https://i.ytimg.com/vi/lO35XpOV_LQ/sddefault.jpg', 'bg_image': '/home/miro/PycharmProjects/OCP_sprint/skills/skill-popcornflix/res/popcornflix_icon.jpg'}
